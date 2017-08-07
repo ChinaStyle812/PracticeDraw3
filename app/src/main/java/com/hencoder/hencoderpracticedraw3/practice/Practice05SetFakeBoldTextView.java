@@ -3,6 +3,7 @@ package com.hencoder.hencoderpracticedraw3.practice;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,6 +28,7 @@ public class Practice05SetFakeBoldTextView extends View {
         paint.setTextSize(60);
 
         // 使用 Paint.setFakeBoldText() 来加粗文字
+        paint.setFakeBoldText(true);
     }
 
     @Override
@@ -34,5 +36,9 @@ public class Practice05SetFakeBoldTextView extends View {
         super.onDraw(canvas);
 
         canvas.drawText(text, 50, 100, paint);
+
+        paint.setFakeBoldText(false);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        canvas.drawText(text, 50, 170, paint);
     }
 }

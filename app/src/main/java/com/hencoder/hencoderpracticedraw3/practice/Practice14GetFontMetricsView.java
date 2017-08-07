@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class Practice14GetFontMetricsView extends View {
@@ -45,11 +46,34 @@ public class Practice14GetFontMetricsView extends View {
         // 这种居中算法的优点是，可以让不同的文字的 baseline 对齐
 
         int middle = (top + bottom) / 2;
-        canvas.drawText(texts[0], 100, middle, paint2);
-        canvas.drawText(texts[1], 200, middle, paint2);
-        canvas.drawText(texts[2], 300, middle, paint2);
-        canvas.drawText(texts[3], 400, middle, paint2);
-        canvas.drawText(texts[4], 500, middle, paint2);
-        canvas.drawText(texts[5], 600, middle, paint2);
+        float txtH = 0;
+
+        Paint.FontMetrics fm = paint2.getFontMetrics();
+        txtH = (Math.abs(fm.ascent + fm.descent)) / 2;
+        canvas.drawText(texts[0], 100, middle + txtH, paint2);
+        canvas.drawText(texts[1], 200, middle + txtH, paint2);
+        canvas.drawText(texts[2], 300, middle + txtH, paint2);
+        canvas.drawText(texts[3], 400, middle + txtH, paint2);
+        canvas.drawText(texts[4], 500, middle + txtH, paint2);
+        canvas.drawText(texts[5], 600, middle + txtH, paint2);
+
+        float testY = Math.abs(fm.ascent);
+        canvas.drawText("Â", 0, testY, paint2);
+        canvas.drawText("j", 100, testY, paint2);
+        canvas.drawText("这是汉字", 150, testY, paint2);
+
+        paint1.setStrokeWidth(8);
+        paint1.setStrokeCap(Paint.Cap.ROUND);
+        canvas.drawPoint(100, middle + txtH, paint1);
+        canvas.drawPoint(200, middle + txtH, paint1);
+        canvas.drawPoint(300, middle + txtH, paint1);
+        canvas.drawPoint(400, middle + txtH, paint1);
+        canvas.drawPoint(500, middle + txtH, paint1);
+        canvas.drawPoint(600, middle + txtH, paint1);
+
+        Log.d("sssyyy", "fm.bottom:" + fm.bottom);
+        Log.d("sssyyy", "fm.descent:" + fm.descent);
+        Log.d("sssyyy", "fm.top:" + fm.top);
+        Log.d("sssyyy", "fm.ascent:" + fm.ascent);
     }
 }
